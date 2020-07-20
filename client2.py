@@ -16,7 +16,6 @@ def findLocalMax2d(array,colls,rows):
     colMaxArr = np.amax(array, axis=0)
     resultArr = []
     for i in range(1,colls-1):
-        colPeaks = []
         for j in range(1,rows-1):
                 if array[i][j-1]<array[i][j]>array[i][j+1]:
                     if array[i-1][j]<array[i][j]>array[i+1][j]:
@@ -50,19 +49,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             distance = ((coordArr[0][0] - coordArr[1][0])**2 + (coordArr[0][1] - coordArr[1][1])**2)**(1/2)
             res = round(distance,1)
         else:
-            print(coordArr)
+            res = 0
 
         #code here
 
         sock.send(str(res).encode())
         resp = sock.recv(20)
         print(resp)
-        if resp == b"nope":
-            print(coordArr)
-            print(res)
-            print(im)
-            np.save('array_0', im)
-            plt.pause(2000)
 
         sock.send(b"beat")
         beat = sock.recv(10)
